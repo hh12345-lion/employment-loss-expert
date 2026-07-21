@@ -2,7 +2,7 @@
 
 **Version:** 1.0  
 **Last updated:** June 2025  
-**Canonical site:** [https://www.employmentlossexpert.com](https://www.employmentlossexpert.com) (apex redirects to `www` via `middleware.ts`)
+**Canonical site:** [https://www.employmentlossexpert.com](https://www.employmentlossexpert.com) (apex redirects to `www` via Netlify Primary domain setting)
 
 ---
 
@@ -605,7 +605,7 @@ Still actively searched by PI solicitors (disability definition, reduction facto
 | Item | Status / location |
 |------|-------------------|
 | Vercel deployment | Production host |
-| DNS: apex → `www` | `middleware.ts` |
+| DNS: apex → `www` | Netlify Primary domain setting |
 | `html lang="en-GB"` | `app/layout.tsx` |
 | hreflang `en-GB`, `en-US`, `x-default` | Add to `createMetadata()` `alternates.languages` when US landing variant exists |
 | `Lead_notification_url` | Netlify env + `.env.example` (contact form webhook) |
