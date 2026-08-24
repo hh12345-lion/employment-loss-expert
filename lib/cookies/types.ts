@@ -8,37 +8,37 @@ export type CookieCategory = "necessary" | "analytics" | "marketing" | "preferen
 export type CategoryConsent = Record<CookieCategory, boolean>;
 
 export type StoredConsent = {
-  version: number;
-  timestamp: string;
-  expiresAt: string;
-  categories: CategoryConsent;
+ version: number;
+ timestamp: string;
+ expiresAt: string;
+ categories: CategoryConsent;
 };
 
 export const DEFAULT_DENIED: CategoryConsent = {
-  necessary: true,
-  analytics: false,
-  marketing: false,
-  preferences: false,
+ necessary: true,
+ analytics: false,
+ marketing: false,
+ preferences: false,
 };
 
 export const ACCEPT_ALL: CategoryConsent = {
-  necessary: true,
-  analytics: true,
-  marketing: true,
-  preferences: true,
+ necessary: true,
+ analytics: true,
+ marketing: true,
+ preferences: true,
 };
 
 export type ConsentContextValue = {
-  /** False until client has read storage (prevents hydration flash). */
-  ready: boolean;
-  hasChoice: boolean;
-  categories: CategoryConsent;
-  bannerOpen: boolean;
-  preferencesOpen: boolean;
-  acceptAll: () => void;
-  rejectNonEssential: () => void;
-  openPreferences: () => void;
-  closePreferences: () => void;
-  savePreferences: (categories: Omit<CategoryConsent, "necessary">) => void;
-  openSettings: () => void;
+ /** False until client has read storage (prevents hydration flash). */
+ ready: boolean;
+ hasChoice: boolean;
+ categories: CategoryConsent;
+ bannerOpen: boolean;
+ preferencesOpen: boolean;
+ acceptAll: () => void;
+ rejectNonEssential: () => void;
+ openPreferences: () => void;
+ closePreferences: () => void;
+ savePreferences: (categories: Omit<CategoryConsent, "necessary">) => void;
+ openSettings: () => void;
 };

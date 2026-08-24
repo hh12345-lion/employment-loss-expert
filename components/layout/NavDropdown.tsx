@@ -25,15 +25,15 @@ export function NavDropdown({ item }: NavDropdownProps) {
     <div className="relative flex items-center" onMouseEnter={openMenu} onMouseLeave={closeMenu}>
       <Link
         href={item.href}
-        className={`flex min-h-11 items-center rounded-l px-2 py-2 text-sm transition-colors hover:bg-section-alt ${
-          item.highlight ? "font-semibold text-highlight" : "text-body hover:text-primary"
+        className={`flex min-h-11 items-center px-2.5 py-2 text-sm transition-colors ${
+          item.highlight ? "font-semibold text-highlight" : "text-body hover:text-ink"
         }`}
       >
         {item.label}
       </Link>
       <button
         type="button"
-        className={`flex min-h-11 items-center rounded-r px-1 py-2 transition-colors hover:bg-section-alt ${
+        className={`flex min-h-11 items-center px-1 py-2 transition-colors ${
           item.highlight ? "text-highlight" : "text-body"
         }`}
         aria-expanded={open}
@@ -54,7 +54,7 @@ export function NavDropdown({ item }: NavDropdownProps) {
 
       {open && (
         <div
-          className="absolute left-0 top-full z-50 mt-1 max-h-[70vh] min-w-[260px] overflow-y-auto rounded-lg border border-border bg-white py-2 shadow-lg"
+          className="absolute left-0 top-full z-50 mt-1 max-h-[70vh] min-w-[260px] overflow-y-auto border border-border bg-white py-2"
           role="menu"
         >
           {item.links.map((link) => (
@@ -62,7 +62,7 @@ export function NavDropdown({ item }: NavDropdownProps) {
               key={link.href}
               href={link.href}
               className={`block px-4 py-2.5 text-sm transition-colors hover:bg-section-alt ${
-                link.highlight ? "font-semibold text-highlight" : "text-body hover:text-primary"
+                link.highlight ? "font-semibold text-highlight" : "text-body hover:text-ink"
               }`}
               role="menuitem"
               onClick={() => setOpen(false)}

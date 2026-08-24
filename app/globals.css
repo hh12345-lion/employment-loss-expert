@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #0a2e4a;
-  --color-accent: #0d7377;
-  --color-highlight: #e8622a;
-  --color-section-alt: #f4f8fa;
-  --color-border: #d0e4ed;
-  --color-body: #374151;
-  --font-sans: var(--font-inter);
-  --radius-card: 8px;
-  --radius-small: 4px;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.06);
+  --color-primary: #0f3d3e;
+  --color-accent: #1a6b6c;
+  --color-highlight: #c45c26;
+  --color-section-alt: #eef6f6;
+  --color-surface: #f7fafa;
+  --color-border: #c5d9d9;
+  --color-body: #3f4f4f;
+  --color-ink: #0a2425;
+  --font-sans: var(--font-source-sans);
+  --font-display: var(--font-literata);
+  --radius-card: 0px;
+  --radius-small: 2px;
+  --shadow-card: none;
 }
 
 html {
@@ -19,9 +22,9 @@ html {
 }
 
 body {
-  background: #ffffff;
-  color: #374151;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  background: var(--color-surface);
+  color: var(--color-body);
+  font-family: var(--font-source-sans), system-ui, sans-serif;
   overflow-x: hidden;
   min-width: 320px;
 }
@@ -31,6 +34,10 @@ video,
 svg {
   max-width: 100%;
   height: auto;
+}
+
+.font-display {
+  font-family: var(--font-literata), Georgia, "Times New Roman", serif;
 }
 
 /* Prevent iOS zoom on focused form fields (16px minimum) */
@@ -43,15 +50,17 @@ svg {
 }
 
 .prose-content h2 {
-  color: #0a2e4a;
+  color: var(--color-ink);
+  font-family: var(--font-literata), Georgia, serif;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
 
 .prose-content h3 {
-  color: #0a2e4a;
+  color: var(--color-ink);
+  font-family: var(--font-literata), Georgia, serif;
   font-size: 1.25rem;
   font-weight: 600;
   margin-top: 1.5rem;
@@ -60,7 +69,7 @@ svg {
 
 .prose-content p {
   margin-bottom: 1rem;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .prose-content ul,
@@ -71,20 +80,17 @@ svg {
 
 .prose-content li {
   margin-bottom: 0.5rem;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 .prose-content a {
-  color: #0d7377;
+  color: var(--color-accent);
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .prose-content a:hover {
-  color: #0a2e4a;
-}
-
-.card-shadow {
-  box-shadow: var(--shadow-card);
+  color: var(--color-ink);
 }
 
 @keyframes slideUp {
@@ -107,4 +113,19 @@ svg {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-up {
+  animation: revealUp 0.55s ease-out both;
 }

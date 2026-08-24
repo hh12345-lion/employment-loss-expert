@@ -11,30 +11,30 @@ import { faqHubLinks } from "@/lib/data/seo-related-links";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
 
 export const metadata: Metadata = createMetadata({
-  title: "Employment Loss Expert Witness FAQ UK | Common Questions Answered",
-  description:
-    "Answers to common questions about employment loss expert witnesses: Ogden Tables, Smith v Manchester, Polkey, ERA 2025, fees, and CPR Part 35.",
-  path: "/faq",
+ title: "Employment Loss Expert Witness FAQ | Common Questions Answered",
+ description:
+ "Answers to common questions about employment loss expert witnesses: Ogden Tables, Smith v Manchester, Polkey, ERA 2025, fees, and CPR Part 35.",
+ path: "/faq",
 });
 
 const breadcrumbs = [
-  { name: "Home", path: "/" },
-  { name: "FAQ", path: "/faq" },
+ { name: "Home", path: "/" },
+ { name: "FAQ", path: "/faq" },
 ];
 
 export default function FAQPage() {
-  return (
-    <PageLayout>
-      <JsonLd data={[breadcrumbSchema(breadcrumbs), faqSchema(siteFaqs)]} />
-      <PageHero
-        title="Employment Loss Expert Witness FAQ"
-        subtitle="Answers to common questions from UK solicitors about employment loss expert witnesses."
-        breadcrumbs={breadcrumbs}
-      />
-      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        <FAQSection faqs={siteFaqs} title="Common Questions" />
-        <RelatedLinks title="Related pages" links={faqHubLinks} />
-      </div>
-    </PageLayout>
-  );
+ return (
+ <PageLayout>
+ <JsonLd data={[breadcrumbSchema(breadcrumbs), faqSchema(siteFaqs)]} />
+ <PageHero
+ title="Employment Loss Expert Witness FAQ"
+ subtitle="Answers to common questions from attorneys about employment loss expert witnesses."
+ breadcrumbs={breadcrumbs}
+ />
+ <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <FAQSection faqs={siteFaqs} title="Common Questions" />
+ <RelatedLinks title="Related pages" links={faqHubLinks} />
+ </div>
+ </PageLayout>
+ );
 }

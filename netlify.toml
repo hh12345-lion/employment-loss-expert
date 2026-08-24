@@ -4,11 +4,14 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[[redirects]]
-  from = "/api/submit-lead"
-  to = "/.netlify/functions/submit-lead"
-  status = 200
-  force = true
+# Lead submissions use Next.js App Router /api/submit-lead (Sheets + webhook).
+# Do not force-redirect to a Netlify function — it bypasses the Next route and
+# breaks when only Netlify env vars for the Next runtime are set.
+# [[redirects]]
+#   from = "/api/submit-lead"
+#   to = "/.netlify/functions/submit-lead"
+#   status = 200
+#   force = true
 
 [[headers]]
   for = "/sitemap.xml"

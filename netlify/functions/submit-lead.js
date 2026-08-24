@@ -1,6 +1,6 @@
 /**
- * Netlify serverless handler: webhook + Google Sheets.
- * Logic mirrors lib/leads/processLeadSubmission.ts
+ * Netlify serverless handler (optional fallback).
+ * Prefer Next.js /api/submit-lead — keep this aligned with minimal lead fields.
  */
 const { google } = require("googleapis");
 
@@ -15,24 +15,11 @@ function parseLead(body) {
   const fullName = sanitize(body.fullName);
   const email = sanitize(body.email).toLowerCase();
   const phone = sanitize(body.phone);
+  const description = sanitize(body.description || body.message);
 
   if (!fullName || !email) return null;
 
-  return {
-    fullName,
-    email,
-    phone,
-    lawFirm: sanitize(body.lawFirm),
-    practiceArea: sanitize(body.practiceArea),
-    caseType: sanitize(body.caseType),
-    expertNeed: sanitize(body.expertNeed),
-    expertAppointment: sanitize(body.expertAppointment) || "Not decided",
-    earnings: sanitize(body.earnings) || "Unknown",
-    deadline: sanitize(body.deadline),
-    era2025: sanitize(body.era2025) || "Not sure",
-    urgency: sanitize(body.urgency) || "Standard",
-    description: sanitize(body.description),
-  };
+  return { fullName, email, phone, description };
 }
 
 function formatRow(lead) {
@@ -42,15 +29,6 @@ function formatRow(lead) {
     lead.fullName,
     lead.email,
     lead.phone,
-    lead.lawFirm,
-    lead.practiceArea,
-    lead.caseType,
-    lead.expertNeed,
-    lead.expertAppointment,
-    lead.earnings,
-    lead.deadline,
-    lead.era2025,
-    lead.urgency,
     lead.description,
   ];
 }
@@ -79,93 +57,92 @@ async function writeToSheets(lead) {
   if (!sheetsConfigured()) return false;
 
   try {
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-        private_key: normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY),
-      },
+    const auth = new google.auth.JWT({
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      key: normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY),
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
-
     const sheets = google.sheets({ version: "v4", auth });
-    const sheetName = process.env.GOOGLE_SHEET_TAB_NAME || "Sheet1";
-
+    const tab = process.env.GOOGLE_SHEET_TAB_NAME || "Sheet14";
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: `${sheetName}!A:A`,
+      range: `${tab}!A:F`,
       valueInputOption: "USER_ENTERED",
-      insertDataOption: "INSERT_ROWS",
       requestBody: { values: [formatRow(lead)] },
     });
-
     return true;
-  } catch (err) {
-    console.error("Google Sheets write failed:", err.message);
+  } catch (error) {
+    console.error("Google Sheets write failed:", error);
     return false;
   }
 }
 
-async function postWebhook(lead) {
+async function postToWebhook(lead) {
   const webhookUrl =
     process.env.Lead_notification_url || process.env.LEAD_NOTIFICATION_URL;
-
   if (!webhookUrl) return false;
 
-  try {
-    const response = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        "Full Name": lead.fullName,
-        Email: lead.email,
-        "Phone Number": lead.phone,
-        "Brand name": BRAND_NAME,
-      }),
-    });
-    return response.ok;
-  } catch (err) {
-    console.error("Webhook failed:", err.message);
-    return false;
-  }
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      "Full Name": lead.fullName,
+      Email: lead.email,
+      "Phone Number": lead.phone,
+      "Brand name": BRAND_NAME,
+    }),
+  });
+  return response.ok;
 }
 
 exports.handler = async (event) => {
-  const json = (statusCode, body) => ({
-    statusCode,
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-
   if (event.httpMethod !== "POST") {
-    return json(405, { error: "Method not allowed" });
+    return { statusCode: 405, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
   let body;
   try {
     body = JSON.parse(event.body || "{}");
   } catch {
-    return json(400, { error: "Invalid JSON body" });
+    return { statusCode: 400, body: JSON.stringify({ error: "Invalid JSON body" }) };
   }
 
   const lead = parseLead(body);
   if (!lead) {
-    return json(400, { error: "fullName and email are required" });
-  }
-
-  if (!lead.lawFirm || !lead.practiceArea || !lead.caseType || !lead.description) {
-    return json(400, { error: "Please complete all required fields" });
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "fullName and email are required" }),
+    };
   }
 
   const sheetsOk = await writeToSheets(lead);
-  const webhookOk = await postWebhook(lead);
-
-  if (!sheetsOk && !webhookOk) {
-    const configured = sheetsConfigured() || Boolean(process.env.Lead_notification_url);
-    if (!configured) {
-      return json(500, { error: "Lead storage is not configured" });
-    }
-    return json(502, { error: "Failed to save your enquiry" });
+  let webhookOk = false;
+  try {
+    webhookOk = await postToWebhook(lead);
+  } catch (error) {
+    console.error("Webhook delivery failed:", error);
   }
 
-  return json(200, { ok: true });
+  if (!sheetsOk && !webhookOk) {
+    const hasWebhook = Boolean(
+      process.env.Lead_notification_url || process.env.LEAD_NOTIFICATION_URL
+    );
+    const hasSheets = sheetsConfigured();
+    if (!hasWebhook && !hasSheets) {
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ error: "Lead storage is not configured" }),
+      };
+    }
+    return {
+      statusCode: 502,
+      body: JSON.stringify({ error: "Failed to save your enquiry" }),
+    };
+  }
+
+  return {
+    statusCode: 200,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ok: true }),
+  };
 };

@@ -8,9 +8,9 @@ import { setDefaultConsent } from "@/lib/cookies/consentMode";
  * CookieConsentProvider re-applies stored consent on mount.
  */
 export function ConsentModeInit() {
-  useEffect(() => {
-    setDefaultConsent();
-  }, []);
+ useEffect(() => {
+ setDefaultConsent();
+ }, []);
 
-  return null;
+ return null;
 }

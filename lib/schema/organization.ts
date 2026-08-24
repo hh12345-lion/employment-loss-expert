@@ -1,4 +1,4 @@
-import { SITE_URL, SITE_NAME, SITE_EMAIL, LINKEDIN_URL, SITE_REGION_LABEL } from "../site";
+import { SITE_URL, SITE_NAME, SITE_EMAIL, LINKEDIN_URL } from "../site";
 import { services } from "../data/services";
 
 export function organizationSchema() {
@@ -11,15 +11,13 @@ export function organizationSchema() {
         name: SITE_NAME,
         url: SITE_URL,
         email: SITE_EMAIL,
-        description: `Referral service connecting solicitors with employment loss expert witnesses for ${SITE_REGION_LABEL} proceedings.`,
+        description:
+          "Referral service connecting attorneys with employment loss expert witnesses for personal injury, employment, and family-law matters.",
         address: {
           "@type": "PostalAddress",
-          addressCountry: "GB",
+          addressCountry: "US",
         },
-        areaServed: {
-          "@type": "Country",
-          name: "United Kingdom",
-        },
+        areaServed: "US",
         sameAs: [LINKEDIN_URL],
       },
       {
@@ -27,6 +25,7 @@ export function organizationSchema() {
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: SITE_NAME,
+        inLanguage: "en-US",
         publisher: { "@id": `${SITE_URL}/#organization` },
         potentialAction: {
           "@type": "SearchAction",
@@ -40,7 +39,7 @@ export function organizationSchema() {
         name: SITE_NAME,
         url: SITE_URL,
         serviceType: "Employment Loss Expert Witness",
-        areaServed: "United Kingdom",
+        areaServed: "US",
         provider: { "@id": `${SITE_URL}/#organization` },
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -70,7 +69,7 @@ export function servicesPageSchema() {
       name: s.title,
       description: s.description,
       provider: { "@id": `${SITE_URL}/#organization` },
-      areaServed: "United Kingdom",
+      areaServed: "US",
       serviceType: s.title,
     })),
   };
@@ -93,6 +92,7 @@ export function articleSchema({
     headline: title,
     description,
     url: `${SITE_URL}${path}`,
+    inLanguage: "en-US",
     author: { "@id": `${SITE_URL}/#organization` },
     publisher: { "@id": `${SITE_URL}/#organization` },
     ...(aboutServiceId && {

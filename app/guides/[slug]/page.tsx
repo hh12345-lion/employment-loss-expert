@@ -13,55 +13,55 @@ import { RelatedLinks } from "@/components/seo/RelatedLinks";
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateStaticParams() {
-  return getGuideSlugs().map((slug) => ({ slug }));
+ return getGuideSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const guide = getGuide(slug);
-  if (!guide) return {};
-  return createMetadata({
-    title: guide.metaTitle,
-    description: guide.metaDescription,
-    path: `/guides/${slug}`,
-  });
+ const { slug } = await params;
+ const guide = getGuide(slug);
+ if (!guide) return {};
+ return createMetadata({
+ title: guide.metaTitle,
+ description: guide.metaDescription,
+ path: `/guides/${slug}`,
+ });
 }
 
 export default async function GuidePage({ params }: Props) {
-  const { slug } = await params;
-  const guide = getGuide(slug);
-  if (!guide) notFound();
+ const { slug } = await params;
+ const guide = getGuide(slug);
+ if (!guide) notFound();
 
-  const breadcrumbs = [
-    { name: "Home", path: "/" },
-    { name: "Guides", path: "/guides" },
-    { name: guide.title, path: `/guides/${slug}` },
-  ];
+ const breadcrumbs = [
+ { name: "Home", path: "/" },
+ { name: "Guides", path: "/guides" },
+ { name: guide.title, path: `/guides/${slug}` },
+ ];
 
-  return (
-    <PageLayout>
-      <JsonLd
-        data={[
-          articleSchema({
-            title: guide.metaTitle,
-            description: guide.metaDescription,
-            path: `/guides/${slug}`,
-            aboutServiceId: guide.aboutServiceId,
-          }),
-          breadcrumbSchema(breadcrumbs),
-        ]}
-      />
-      <PageHero title={guide.h1} breadcrumbs={breadcrumbs} />
-      <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-        {guide.sections.map((section) => (
-          <div key={section.heading}>
-            <h2>{section.heading}</h2>
-            <p>{section.content}</p>
-          </div>
-        ))}
+ return (
+ <PageLayout>
+ <JsonLd
+ data={[
+ articleSchema({
+ title: guide.metaTitle,
+ description: guide.metaDescription,
+ path: `/guides/${slug}`,
+ aboutServiceId: guide.aboutServiceId,
+ }),
+ breadcrumbSchema(breadcrumbs),
+ ]}
+ />
+ <PageHero title={guide.h1} breadcrumbs={breadcrumbs} />
+ <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ {guide.sections.map((section) => (
+ <div key={section.heading}>
+ <h2>{section.heading}</h2>
+ <p>{section.content}</p>
+ </div>
+ ))}
 
-        <RelatedLinks links={getGuideRelatedLinks(slug)} />
-      </article>
-    </PageLayout>
-  );
+ <RelatedLinks links={getGuideRelatedLinks(slug)} />
+ </article>
+ </PageLayout>
+ );
 }

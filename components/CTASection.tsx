@@ -1,30 +1,32 @@
 import Link from "next/link";
 
 type CTASectionProps = {
-  title?: string;
-  description?: string;
-  primaryHref?: string;
-  primaryLabel?: string;
+ title?: string;
+ description?: string;
+ primaryHref?: string;
+ primaryLabel?: string;
 };
 
 export function CTASection({
-  title = "Ready to Instruct an Employment Loss Expert?",
-  description = "Submit your case details and we will match you with a qualified employment loss expert witness for PI, ET, or family law proceedings in England and Wales. Response within 1 business day.",
-  primaryHref = "/contact",
-  primaryLabel = "Instruct an Expert Witness",
+ title = "Need an employment loss expert?",
+ description = "Share a few case details and we will match you with a qualified employment loss expert witness. Typical response within one business day.",
+ primaryHref = "/contact",
+ primaryLabel = "Request a referral",
 }: CTASectionProps) {
-  return (
-    <section className="bg-accent py-14 md:py-16">
-      <div className="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-        <h2 className="text-2xl font-bold text-white md:text-3xl">{title}</h2>
-        <p className="mt-4 text-white/90">{description}</p>
-        <Link
-          href={primaryHref}
-          className="mt-8 inline-flex min-h-11 items-center justify-center rounded bg-white px-8 py-3 text-sm font-semibold text-accent transition-colors hover:bg-section-alt"
-        >
-          {primaryLabel}
-        </Link>
-      </div>
-    </section>
-  );
+ return (
+ <section className="border-y border-border bg-section-alt py-14 md:py-16">
+ <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 sm:px-6 lg:flex-row lg:items-end lg:justify-between lg:px-8">
+ <div className="max-w-xl">
+ <h2 className="font-display text-2xl font-semibold text-ink md:text-3xl">{title}</h2>
+ <p className="mt-3 text-body">{description}</p>
+ </div>
+ <Link
+ href={primaryHref}
+ className="inline-flex min-h-11 shrink-0 items-center justify-center bg-primary px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent"
+ >
+ {primaryLabel}
+ </Link>
+ </div>
+ </section>
+ );
 }
