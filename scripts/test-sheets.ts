@@ -10,15 +10,7 @@ async function test() {
     "Test User",
     "test@example.com",
     "07000000000",
-    "Test Firm",
-    "Employment Tribunal",
-    "Unfair Dismissal ET",
-    "Employment Consultant / Vocational Expert",
-    "Not decided",
-    "Unknown",
-    "",
-    "Not sure",
-    "Standard",
+    "contact",
     "Connection test from scripts/test-sheets.ts",
   ]);
   console.log("OK:", result.updatedRange);

@@ -1,6 +1,6 @@
 /**
- * Netlify serverless handler (optional fallback).
- * Prefer Next.js /api/submit-lead — keep this aligned with minimal lead fields.
+ * Netlify serverless handler for /api/submit-lead.
+ * Outbound webhook uses the standard five-key JSON (see Lead_notification_setup.md).
  */
 const { google } = require("googleapis");
 
@@ -11,15 +11,30 @@ function sanitize(value) {
   return String(value).replace(/<[^>]*>/g, "").trim();
 }
 
+function getSiteDomain() {
+  const raw =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.employmentlossexpert.com";
+  try {
+    return new URL(raw).hostname.replace(/^www\./i, "");
+  } catch {
+    return raw
+      .replace(/^https?:\/\//i, "")
+      .replace(/^www\./i, "")
+      .split("/")[0]
+      .trim();
+  }
+}
+
 function parseLead(body) {
   const fullName = sanitize(body.fullName);
   const email = sanitize(body.email).toLowerCase();
   const phone = sanitize(body.phone);
+  const formType = sanitize(body.formType).toLowerCase() === "instruct" ? "instruct" : "contact";
   const description = sanitize(body.description || body.message);
 
   if (!fullName || !email) return null;
 
-  return { fullName, email, phone, description };
+  return { fullName, email, phone, formType, description };
 }
 
 function formatRow(lead) {
@@ -29,6 +44,7 @@ function formatRow(lead) {
     lead.fullName,
     lead.email,
     lead.phone,
+    lead.formType,
     lead.description,
   ];
 }
@@ -66,7 +82,7 @@ async function writeToSheets(lead) {
     const tab = process.env.GOOGLE_SHEET_TAB_NAME || "Sheet14";
     await sheets.spreadsheets.values.append({
       spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: `${tab}!A:F`,
+      range: `${tab}!A:G`,
       valueInputOption: "USER_ENTERED",
       requestBody: { values: [formatRow(lead)] },
     });
@@ -88,8 +104,9 @@ async function postToWebhook(lead) {
     body: JSON.stringify({
       "Full Name": lead.fullName,
       Email: lead.email,
-      "Phone Number": lead.phone,
+      "Phone Number": lead.phone || "",
       "Brand name": BRAND_NAME,
+      domain: getSiteDomain(),
     }),
   });
   return response.ok;
