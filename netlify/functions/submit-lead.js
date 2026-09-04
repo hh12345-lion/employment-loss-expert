@@ -13,7 +13,7 @@ function sanitize(value) {
 
 function getSiteDomain() {
   const raw =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.employmentlossexpert.com";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://employmentlossexpert.com";
   try {
     return new URL(raw).hostname.replace(/^www\./i, "");
   } catch {
