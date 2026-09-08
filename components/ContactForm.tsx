@@ -3,6 +3,7 @@
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { SITE_EMAIL } from "@/lib/site";
+import { submitNetlifyForm } from "@/lib/submitNetlifyForm";
 
 export function ContactForm() {
   const router = useRouter();
@@ -38,6 +39,17 @@ export function ContactForm() {
       });
 
       if (res.ok) {
+        try {
+          await submitNetlifyForm("contact", {
+            name: payload.fullName,
+            email: payload.email,
+            phone: payload.phone,
+            message: payload.description,
+          });
+        } catch {
+          // Netlify form is secondary; don't block the visitor.
+        }
+
         router.push("/thank-you");
         return;
       }
@@ -62,7 +74,20 @@ export function ContactForm() {
   const labelClass = "mb-1.5 block text-sm font-medium text-ink";
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-lg space-y-5">
+    <form
+      name="contact"
+      method="POST"
+      action="/__forms.html"
+      onSubmit={handleSubmit}
+      className="max-w-lg space-y-5"
+    >
+      <input type="hidden" name="form-name" value="contact" />
+      <p className="hidden" aria-hidden="true">
+        <label>
+          Do not fill this out:{" "}
+          <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
       <div>
         <label htmlFor="name" className={labelClass}>
           Full name *
