@@ -5,9 +5,11 @@ export type LeadWebhookInput = {
   fullName: string;
   email: string;
   phone: string;
+  /** Free-text enquiry body — always sent to n8n as `message`. */
+  message?: string;
 };
 
-/** POST the standard five-key JSON payload to Lead_notification_url. */
+/** POST the standard lead JSON payload to Lead_notification_url. */
 export async function notifyLeadWebhook(lead: LeadWebhookInput): Promise<boolean> {
   const webhookUrl =
     process.env.Lead_notification_url || process.env.LEAD_NOTIFICATION_URL;
@@ -20,6 +22,7 @@ export async function notifyLeadWebhook(lead: LeadWebhookInput): Promise<boolean
     "Phone Number": lead.phone || "",
     "Brand name": BRAND_NAME,
     domain: getSiteDomain(),
+    message: lead.message ?? "",
   };
 
   const response = await fetch(webhookUrl, {
