@@ -29,6 +29,7 @@ function parseLead(body) {
   const fullName = sanitize(body.fullName);
   const email = sanitize(body.email).toLowerCase();
   const phone = sanitize(body.phone);
+  const message = resolveLeadMessage(body);
   const formType = sanitize(body.formType).toLowerCase() === "instruct" ? "instruct" : "contact";
   const description = sanitize(body.description || body.message);
 
@@ -107,9 +108,36 @@ async function postToWebhook(lead) {
       "Phone Number": lead.phone || "",
       "Brand name": BRAND_NAME,
       domain: getSiteDomain(),
+    message,
     }),
   });
   return response.ok;
+}
+
+/** Map site-specific free-text field names to universal `message`. */
+function resolveLeadMessage(body) {
+  if (!body || typeof body !== "object") return "";
+  const keys = [
+    "message",
+    "Message",
+    "description",
+    "enquiry",
+    "details",
+    "summary",
+    "notes",
+    "matter",
+    "caseSummary",
+    "additionalInfo",
+    "additional_info",
+    "caseDetails",
+    "enquiryDetails",
+  ];
+  for (const key of keys) {
+    if (body[key] != null && String(body[key]).trim()) {
+      return String(body[key]).trim();
+    }
+  }
+  return "";
 }
 
 exports.handler = async (event) => {

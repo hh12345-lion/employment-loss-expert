@@ -39,6 +39,7 @@ export async function processLeadSubmission(body: LeadPayload): Promise<ProcessL
       fullName: lead.fullName,
       email: lead.email,
       phone: lead.phone,
+      message: lead.description ?? lead.message ?? "",
     });
   } catch (error) {
     console.error("Webhook delivery failed:", error);
