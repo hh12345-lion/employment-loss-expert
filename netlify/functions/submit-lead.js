@@ -1,3 +1,119 @@
+﻿/**
+ * Netlify serverless handler for /api/submit-lead.
+ * Outbound webhook uses the standard five-key JSON (see Lead_notification_setup.md).
+ */
+const { google } = require("googleapis");
+
+const BRAND_NAME = "EmploymentLossExpert";
+
+function sanitize(value) {
+  if (value == null) return "";
+  return String(value).replace(/<[^>]*>/g, "").trim();
+}
+
+function getSiteDomain() {
+  const raw =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://employmentlossexpert.com";
+  try {
+    return new URL(raw).hostname.replace(/^www\./i, "");
+  } catch {
+    return raw
+      .replace(/^https?:\/\//i, "")
+      .replace(/^www\./i, "")
+      .split("/")[0]
+      .trim();
+  }
+}
+
+function parseLead(body) {
+  const fullName = sanitize(body.fullName);
+  const email = sanitize(body.email).toLowerCase();
+  const phone = sanitize(body.phone);
+  const message = resolveLeadMessage(body);
+  const formType = sanitize(body.formType).toLowerCase() === "instruct" ? "instruct" : "contact";
+  const description = sanitize(body.description || body.message);
+
+  if (!fullName || !email) return null;
+
+  return { fullName, email, phone, formType, description, message };
+}
+
+function formatRow(lead) {
+  return [
+    new Date().toISOString(),
+    BRAND_NAME,
+    lead.fullName,
+    lead.email,
+    lead.phone,
+    lead.formType,
+    lead.description,
+  ];
+}
+
+function normalizePrivateKey(raw) {
+  if (!raw) return undefined;
+  let key = String(raw).trim();
+  if (
+    (key.startsWith('"') && key.endsWith('"')) ||
+    (key.startsWith("'") && key.endsWith("'"))
+  ) {
+    key = key.slice(1, -1);
+  }
+  return key.replace(/\\n/g, "\n");
+}
+
+function sheetsConfigured() {
+  return Boolean(
+    process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL &&
+      process.env.GOOGLE_PRIVATE_KEY &&
+      process.env.GOOGLE_SHEET_ID
+  );
+}
+
+async function writeToSheets(lead) {
+  if (!sheetsConfigured()) return false;
+
+  try {
+    const auth = new google.auth.JWT({
+      email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      key: normalizePrivateKey(process.env.GOOGLE_PRIVATE_KEY),
+      scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+    });
+    const sheets = google.sheets({ version: "v4", auth });
+    const tab = process.env.GOOGLE_SHEET_TAB_NAME || "Sheet14";
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: process.env.GOOGLE_SHEET_ID,
+      range: `${tab}!A:G`,
+      valueInputOption: "USER_ENTERED",
+      requestBody: { values: [formatRow(lead)] },
+    });
+    return true;
+  } catch (error) {
+    console.error("Google Sheets write failed:", error);
+    return false;
+  }
+}
+
+async function postToWebhook(lead) {
+  const webhookUrl =
+    process.env.Lead_notification_url || process.env.LEAD_NOTIFICATION_URL;
+  if (!webhookUrl) return false;
+
+  const response = await fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      "Full Name": lead.fullName,
+      Email: lead.email,
+      "Phone Number": lead.phone || "",
+      "Brand name": BRAND_NAME,
+      domain: getSiteDomain(),
+      message: lead.message || lead.description || "",
+    }),
+  });
+  return response.ok;
+}
+
 /** Map site-specific free-text field names to universal `message`. */
 function resolveLeadMessage(body) {
   if (!body || typeof body !== "object") return "";
@@ -17,12 +133,10 @@ function resolveLeadMessage(body) {
     "enquiryDetails",
     "caseBrief",
     "case_summary",
+    "caseDescription",
+    "case_description",
     "matterDescription",
     "additionalNotes",
-    "caseBackground",
-    "specificQuestions",
-    "briefSummary",
-    "conflict_info",
     "brief",
   ];
   for (const key of keys) {
