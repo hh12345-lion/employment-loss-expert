@@ -13,6 +13,7 @@ const primaryLinks = [
   { href: "/case-types", label: "Case types" },
   { href: "/era-2025", label: "ERA 2025", highlight: true },
   { href: "/guides", label: "Guides" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export function Header() {

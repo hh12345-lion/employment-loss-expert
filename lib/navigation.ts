@@ -19,6 +19,7 @@ export const caseTypeNavLinks = caseTypes.map((c) => ({
 }));
 
 export const resourcesNavLinks = [
+ { label: "Blog", href: "/blog" },
  { label: "Guides", href: "/guides" },
  { label: "How to Instruct", href: "/how-to-instruct" },
  { label: "Qualifications", href: "/qualifications" },
@@ -111,6 +112,7 @@ export const footerColumns = [
  { label: "Services", href: "/services" },
  { label: "Practice Areas", href: "/practice-areas" },
  { label: "Case Types", href: "/case-types" },
+ { label: "Blog", href: "/blog" },
  { label: "Guides", href: "/guides" },
  { label: "Contact", href: "/contact" },
  ],

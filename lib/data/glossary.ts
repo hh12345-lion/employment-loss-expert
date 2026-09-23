@@ -81,7 +81,7 @@ export const glossaryTerms: GlossaryTerm[] = [
  {
  term: "FPR Part 25",
  fragmentId: "fpr-part-25",
- summary: "FPR Part 25 governs expert evidence in family proceedings in nationwide.",
+ summary: "FPR Part 25 governs expert evidence in family proceedings.",
  definition:
  "Court permission may be required before instructing an expert. Experts owe an overriding duty to the court and must comply with FPR Part 25 practice directions.",
  link: { href: "/practice-areas/family-law", label: "Family law practice area" },

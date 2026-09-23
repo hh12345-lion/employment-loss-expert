@@ -24,9 +24,9 @@ export function getPublicSiteUrl(): string {
 export const SITE_URL = getPublicSiteUrl();
 export const SITE_NAME = "EmploymentLossExpert";
 export const SITE_EMAIL = "contact@employmentlossexpert.com";
-export const SITE_REGION = "US";
-/** Short label — avoid repeating country names in marketing copy. */
-export const SITE_REGION_LABEL = "nationwide";
+/** Soft geo — avoid repeating country names in marketing copy. */
+export const SITE_REGION = "worldwide";
+export const SITE_REGION_LABEL = "worldwide";
 export const LINKEDIN_URL =
   "https://www.linkedin.com/company/employment-loss-expert";
 

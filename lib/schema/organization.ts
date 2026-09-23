@@ -13,11 +13,7 @@ export function organizationSchema() {
         email: SITE_EMAIL,
         description:
           "Referral service connecting attorneys with employment loss expert witnesses for personal injury, employment, and family-law matters.",
-        address: {
-          "@type": "PostalAddress",
-          addressCountry: "US",
-        },
-        areaServed: "US",
+        areaServed: "Worldwide",
         sameAs: [LINKEDIN_URL],
       },
       {
@@ -25,7 +21,7 @@ export function organizationSchema() {
         "@id": `${SITE_URL}/#website`,
         url: SITE_URL,
         name: SITE_NAME,
-        inLanguage: "en-US",
+        inLanguage: "en",
         publisher: { "@id": `${SITE_URL}/#organization` },
         potentialAction: {
           "@type": "SearchAction",
@@ -39,7 +35,7 @@ export function organizationSchema() {
         name: SITE_NAME,
         url: SITE_URL,
         serviceType: "Employment Loss Expert Witness",
-        areaServed: "US",
+        areaServed: "Worldwide",
         provider: { "@id": `${SITE_URL}/#organization` },
         hasOfferCatalog: {
           "@type": "OfferCatalog",
@@ -69,7 +65,7 @@ export function servicesPageSchema() {
       name: s.title,
       description: s.description,
       provider: { "@id": `${SITE_URL}/#organization` },
-      areaServed: "US",
+      areaServed: "Worldwide",
       serviceType: s.title,
     })),
   };
@@ -92,7 +88,7 @@ export function articleSchema({
     headline: title,
     description,
     url: `${SITE_URL}${path}`,
-    inLanguage: "en-US",
+    inLanguage: "en",
     author: { "@id": `${SITE_URL}/#organization` },
     publisher: { "@id": `${SITE_URL}/#organization` },
     ...(aboutServiceId && {

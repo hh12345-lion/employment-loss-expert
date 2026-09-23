@@ -44,7 +44,7 @@ export default function ServicesPage() {
  />
  <PageHero
  title="Employment Loss Expert Witness Services"
- subtitle="Comprehensive employment loss expert witness services for personal injury, employment tribunal, and family law attorneys across nationwide."
+ subtitle="Comprehensive employment loss expert witness services for personal injury, employment tribunal, and family law attorneys."
  breadcrumbs={breadcrumbs}
  />
  <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">

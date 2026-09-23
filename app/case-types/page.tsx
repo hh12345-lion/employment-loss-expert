@@ -29,7 +29,7 @@ export default function CaseTypesHubPage() {
  data={[
  breadcrumbSchema(breadcrumbs),
  itemListSchema({
- name: "UK case types requiring employment loss expert witnesses",
+ name: "Case types requiring employment loss expert witnesses",
  items: caseTypes.map((ct) => ({
  name: ct.title,
  path: `/case-types/${ct.slug}`,

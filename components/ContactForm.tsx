@@ -29,6 +29,7 @@ export function ContactForm() {
       phone: String(formData.get("phone") ?? "").trim(),
       formType: "contact" as const,
       description: String(formData.get("message") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
     };
 
     try {

@@ -20,6 +20,7 @@ const PAGES_REQUIRING_METADATA = [
   "app/practice-areas/page.tsx",
   "app/case-types/page.tsx",
   "app/guides/page.tsx",
+  "app/blog/page.tsx",
   "app/glossary/page.tsx",
   "app/faq/page.tsx",
   "app/how-to-instruct/page.tsx",

@@ -35,7 +35,7 @@ export default function GuidesHubPage() {
  ]}
  />
  <PageHero
- title="Guides: Employment Loss Expert Witnesses UK"
+ title="Guides: Employment Loss Expert Witnesses"
  subtitle="In-depth guides for attorneys on employment loss expert evidence across PI, ET, and family law."
  breadcrumbs={breadcrumbs}
  />

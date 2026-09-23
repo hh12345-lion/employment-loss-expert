@@ -5,6 +5,8 @@ import { SITE_URL } from "@/lib/site";
 import { CookieConsentProvider } from "@/components/cookies/CookieConsentProvider";
 import { ConsentModeInit } from "@/components/cookies/ConsentModeInit";
 
+export const dynamic = "force-dynamic";
+
 const sourceSans = Source_Sans_3({
  subsets: ["latin"],
  variable: "--font-source-sans",
@@ -36,7 +38,7 @@ export default function RootLayout({
  children: React.ReactNode;
 }>) {
  return (
- <html lang="en-US" className={`${sourceSans.variable} ${literata.variable} h-full`}>
+ <html lang="en" className={`${sourceSans.variable} ${literata.variable} h-full`}>
  <body className="flex min-h-full flex-col font-sans antialiased">
  <ConsentModeInit />
  <CookieConsentProvider>{children}</CookieConsentProvider>

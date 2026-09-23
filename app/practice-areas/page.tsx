@@ -9,7 +9,7 @@ import { practiceAreasHubLinks } from "@/lib/data/seo-related-links";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
 
 export const metadata: Metadata = createMetadata({
- title: "Employment Loss Expert Witnesses by Practice Area | PI, ET & Family UK",
+ title: "Employment Loss Expert Witnesses by Practice Area | PI, ET & Family",
  description:
  "Employment loss expert witnesses for personal injury, employment tribunal, and family law attorneys. Find the right expert for your practice area.",
  path: "/practice-areas",

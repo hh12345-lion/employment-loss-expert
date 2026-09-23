@@ -11,6 +11,7 @@ const practiceLinks = [
 ];
 
 const learnLinks = [
+  { href: "/blog", label: "Blog" },
   { href: "/guides", label: "Guides" },
   { href: "/faq", label: "FAQ" },
   { href: "/glossary", label: "Glossary" },

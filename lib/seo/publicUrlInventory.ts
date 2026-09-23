@@ -3,6 +3,7 @@
  * Add new static marketing routes to APP_STATIC_PATHS when they ship.
  */
 
+import { getBlogSlugs } from "../blog";
 import { getCaseTypeSlugs } from "../data/case-types";
 import { getGuideSlugs } from "../data/guides";
 import { SITE_URL } from "../site";
@@ -40,6 +41,7 @@ export const APP_STATIC_PATHS: {
  { path: "/how-to-instruct", priority: 0.88, changefreq: "monthly" },
  { path: "/faq", priority: 0.87, changefreq: "monthly" },
  { path: "/guides", priority: 0.87, changefreq: "monthly" },
+ { path: "/blog", priority: 0.87, changefreq: "weekly" },
  { path: "/glossary", priority: 0.75, changefreq: "monthly" },
  { path: "/cookies", priority: 0.5, changefreq: "yearly" },
 ];
@@ -81,7 +83,8 @@ function pathToAbsoluteUrl(path: string): string {
 function getDynamicPaths(): string[] {
  const caseTypes = getCaseTypeSlugs().map((slug) => `/case-types/${slug}`);
  const guides = getGuideSlugs().map((slug) => `/guides/${slug}`);
- return [...caseTypes, ...guides];
+ const blogPosts = getBlogSlugs().map((slug) => `/blog/${slug}`);
+ return [...caseTypes, ...guides, ...blogPosts];
 }
 
 function dedupeSorted(paths: string[]): string[] {
@@ -126,6 +129,7 @@ export function getDefaultPriority(path: string): number {
  if (path === "/") return 1.0;
  if (path.startsWith("/case-types/")) return 0.88;
  if (path.startsWith("/guides/")) return 0.8;
+ if (path.startsWith("/blog/")) return 0.82;
  if (path.startsWith("/practice-areas/")) return 0.92;
  if (path === "/cookies") return 0.5;
  return 0.7;
@@ -134,6 +138,7 @@ export function getDefaultPriority(path: string): number {
 /** Default changefreq heuristics for paths without explicit metadata. */
 export function getDefaultChangeFreq(path: string): SitemapChangeFreq {
  if (path === "/") return "weekly";
+ if (path.startsWith("/blog/")) return "monthly";
  if (path.startsWith("/guides/") || path.startsWith("/case-types/")) return "monthly";
  if (path === "/cookies" || path === "/privacy" || path === "/terms") return "yearly";
  return "monthly";
