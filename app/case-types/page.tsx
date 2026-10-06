@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages, imageForCaseType } from "@/lib/images";
+import { PhotoCard } from "@/components/PhotoCard";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { caseTypes } from "@/lib/data/case-types";
@@ -41,21 +42,20 @@ export default function CaseTypesHubPage() {
  title="Case Types Requiring an Employment Loss Expert Witness"
  subtitle="Explore the case types where employment loss expert evidence is essential."
  breadcrumbs={breadcrumbs}
+ image={siteImages.clinicalRecords}
  />
- <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
- <div className="grid gap-4 sm:grid-cols-2">
+ <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+ <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
  {caseTypes.map((ct) => (
- <Link
+ <PhotoCard
  key={ct.slug}
  href={`/case-types/${ct.slug}`}
- className="rounded-lg border border-border bg-white p-5 card-shadow transition-shadow hover:shadow-md"
- >
- <h2 className="font-bold text-primary">{ct.title}</h2>
- <p className="mt-2 line-clamp-2 text-sm text-body">{ct.paragraphs[0]}</p>
- <span className="mt-3 inline-block text-sm font-semibold text-accent">
- Read guide →
- </span>
- </Link>
+ title={ct.title}
+ description={ct.paragraphs[0]}
+ clamp
+ image={imageForCaseType(ct.slug)}
+ cta="Read guide"
+ />
  ))}
  </div>
  <RelatedLinks title="Related employment loss resources" links={caseTypesHubLinks} />

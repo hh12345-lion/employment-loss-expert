@@ -10,7 +10,7 @@ import { getAllBlogPosts } from "@/lib/blog";
 import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = createMetadata({
-  title: "Blog — Employment Loss Expert Witness Insights",
+  title: "Blog: Employment Loss Expert Witness Insights",
   description:
     "Articles on employment loss expert evidence, tribunal financial analysis, and when specialist earnings evidence may assist instructing solicitors.",
   path: "/blog",
@@ -53,7 +53,7 @@ export default function BlogIndexPage() {
         <div className="mb-10 flex flex-wrap gap-3">
           <Link
             href="/contact"
-            className="inline-flex min-h-[44px] items-center justify-center bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink"
+            className="inline-flex min-h-[44px] items-center justify-center bg-highlight px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink"
           >
             Request a referral
           </Link>
@@ -72,10 +72,10 @@ export default function BlogIndexPage() {
             {posts.map((post) => (
               <li
                 key={post.slug}
-                className="overflow-hidden rounded-lg border border-border bg-white card-shadow"
+                className="group overflow-hidden border border-border bg-white transition-colors hover:border-primary"
               >
                 {post.image ? (
-                  <Link href={`/blog/${post.slug}`} className="relative block h-52 w-full">
+                  <Link href={`/blog/${post.slug}`} className="card-photo relative block aspect-[16/10] w-full overflow-hidden">
                     <Image
                       src={post.image}
                       alt={post.imageAlt || post.title}
@@ -83,6 +83,7 @@ export default function BlogIndexPage() {
                       sizes="(max-width: 768px) 100vw, 50vw"
                       className="object-cover"
                     />
+                    <span className="absolute bottom-0 left-0 h-1.5 w-20 bg-highlight" aria-hidden />
                   </Link>
                 ) : null}
                 <div className="p-6">

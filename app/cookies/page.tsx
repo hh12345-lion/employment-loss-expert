@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -24,7 +25,8 @@ export default function CookiesPage() {
  <PageLayout showCTA={false}>
  <JsonLd data={breadcrumbSchema(breadcrumbs)} />
  <PageHero title="Cookie Policy" breadcrumbs={breadcrumbs} />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout referral={false}>
+ <div className="prose-content">
  <p>Last updated: June 2025</p>
 
  <h2>What Are Cookies?</h2>
@@ -97,7 +99,8 @@ export default function CookiesPage() {
  </Link>
  .
  </p>
- </article>
+ </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

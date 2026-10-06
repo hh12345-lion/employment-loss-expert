@@ -11,6 +11,7 @@ export function organizationSchema() {
         name: SITE_NAME,
         url: SITE_URL,
         email: SITE_EMAIL,
+        logo: `${SITE_URL}/brand/logo.png`,
         description:
           "Referral service connecting attorneys with employment loss expert witnesses for personal injury, employment, and family-law matters.",
         areaServed: "Worldwide",

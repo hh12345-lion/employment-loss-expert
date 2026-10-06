@@ -1,19 +1,16 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { SITE_EMAIL } from "@/lib/site";
 import { HeaderNavPanel } from "./HeaderNavPanel";
 import { MobileNavSheet } from "./MobileNavSheet";
 
 const primaryLinks = [
   { href: "/services", label: "Services" },
   { href: "/practice-areas", label: "Practice areas" },
-  { href: "/how-loss-is-calculated", label: "Loss calculation" },
   { href: "/case-types", label: "Case types" },
-  { href: "/era-2025", label: "ERA 2025", highlight: true },
-  { href: "/guides", label: "Guides" },
-  { href: "/blog", label: "Blog" },
+  { href: "/how-loss-is-calculated", label: "Loss calculation" },
 ];
 
 export function Header() {
@@ -27,92 +24,86 @@ export function Header() {
 
   return (
     <>
-      <header className="relative z-50">
-        <div className="hidden border-b border-border bg-section-alt sm:block">
-          <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2 text-xs text-body sm:px-6 lg:px-8">
-            <span className="font-medium tracking-wide text-ink/80">
-              Expert witness referrals for employment damages
-            </span>
-            <a
-              href={`mailto:${SITE_EMAIL}`}
-              className="font-semibold text-accent hover:text-ink"
-            >
-              {SITE_EMAIL}
-            </a>
-          </div>
-        </div>
-
+      <header className="sticky top-0 z-50">
         <div className="border-b border-border bg-white">
-          <div className="mx-auto flex max-w-6xl items-stretch lg:px-8">
+          <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 sm:px-6 lg:px-8">
             <Link
               href="/"
-              className="flex shrink-0 flex-col justify-center bg-ink px-4 py-4 text-white sm:px-6 sm:py-5 lg:min-w-[15rem]"
+              className="flex shrink-0 items-center"
+              aria-label="Employment Loss Expert home"
               onClick={closeAll}
             >
-              <span className="font-display text-lg font-semibold leading-tight sm:text-xl">
-                Employment Loss
-              </span>
-              <span className="mt-1 text-[10px] font-bold uppercase tracking-[0.28em] text-accent">
-                Expert
-              </span>
+              <Image
+                src="/brand/logo.svg"
+                alt="Employment Loss Expert"
+                width={903}
+                height={174}
+                className="h-8! w-auto sm:h-10!"
+                preload
+                unoptimized
+              />
             </Link>
 
-            <div className="flex min-w-0 flex-1 items-center justify-end gap-2 px-3 py-3 sm:px-4 lg:gap-1 lg:px-6">
-              <nav
-                className="hidden items-center lg:flex"
-                aria-label="Main navigation"
-              >
-                {primaryLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`px-2.5 py-2 text-sm transition-colors xl:px-3 ${
-                      link.highlight
-                        ? "font-semibold text-highlight"
-                        : "text-body hover:text-ink"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <button
-                  type="button"
-                  className="ml-2 flex min-h-10 items-center gap-1 border border-border px-3 py-2 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
-                  aria-expanded={indexOpen}
-                  aria-controls="site-index-panel"
-                  onClick={() => setIndexOpen((v) => !v)}
+            <nav
+              className="ml-auto hidden items-center lg:flex"
+              aria-label="Main navigation"
+            >
+              {primaryLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="px-3 py-2 text-sm font-medium text-body transition-colors hover:text-ink"
+                  onClick={closeAll}
                 >
-                  Index
-                  <svg
-                    className={`h-3.5 w-3.5 transition-transform ${indexOpen ? "rotate-180" : ""}`}
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-              </nav>
-
-              <Link
-                href="/contact"
-                className="hidden min-h-10 items-center bg-highlight px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary lg:inline-flex"
-              >
-                Referral
-              </Link>
-
+                  {link.label}
+                </Link>
+              ))}
               <button
                 type="button"
-                className="inline-flex min-h-11 min-w-11 items-center justify-center bg-section-alt px-3 text-xs font-bold uppercase tracking-wider text-ink lg:hidden"
-                aria-expanded={mobileOpen}
-                aria-controls="mobile-nav-sheet"
-                aria-label={mobileOpen ? "Close menu" : "Open menu"}
-                onClick={() => setMobileOpen((v) => !v)}
+                className="ml-1 flex min-h-10 items-center gap-1.5 px-3 py-2 text-sm font-medium text-body transition-colors hover:text-ink"
+                aria-expanded={indexOpen}
+                aria-controls="site-index-panel"
+                onClick={() => setIndexOpen((v) => !v)}
               >
-                {mobileOpen ? "Close" : "Browse"}
+                All pages
+                <svg
+                  className={`h-3.5 w-3.5 transition-transform ${indexOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
               </button>
-            </div>
+            </nav>
+
+            <Link
+              href="/contact"
+              className="ml-auto inline-flex min-h-10 items-center bg-highlight px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-ink lg:ml-2"
+              onClick={closeAll}
+            >
+              <span className="sm:hidden">Referral</span>
+              <span className="hidden sm:inline">Request a referral</span>
+            </Link>
+
+            <button
+              type="button"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center border border-border text-ink lg:hidden"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav-sheet"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMobileOpen((v) => !v)}
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={mobileOpen ? "M6 6l12 12M18 6L6 18" : "M4 7h16M4 12h16M4 17h16"}
+                />
+              </svg>
+            </button>
           </div>
 
           <HeaderNavPanel open={indexOpen} onClose={() => setIndexOpen(false)} />

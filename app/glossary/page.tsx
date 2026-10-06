@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { GlossaryTerm } from "@/components/seo/GlossaryTerm";
 import { GlossarySearchForm } from "@/components/seo/GlossarySearchForm";
 import { RelatedLinks } from "@/components/seo/RelatedLinks";
@@ -56,6 +57,7 @@ export default async function GlossaryPage({ searchParams }: PageProps) {
  title="Employment Loss Expert Witness Glossary"
  subtitle="Key legal and financial terms for employment loss expert evidence. Each term links to detailed guides where relevant."
  breadcrumbs={breadcrumbs}
+ image={siteImages.lawLibrary}
  />
  <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
  <GlossarySearchForm query={q} resultCount={visibleTerms.length} />

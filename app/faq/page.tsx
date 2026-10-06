@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { FAQSection } from "@/components/FAQSection";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -30,6 +31,7 @@ export default function FAQPage() {
  title="Employment Loss Expert Witness FAQ"
  subtitle="Answers to common questions from attorneys about employment loss expert witnesses."
  breadcrumbs={breadcrumbs}
+ image={siteImages.scalesOfJustice}
  />
  <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
  <FAQSection faqs={siteFaqs} title="Common Questions" />

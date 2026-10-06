@@ -14,14 +14,14 @@ export function HeaderNavPanel({ open, onClose }: HeaderNavPanelProps) {
   return (
     <div
       id="site-index-panel"
-      className="border-t border-border bg-white"
+      className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-border bg-white shadow-[0_24px_40px_-24px_rgba(13,41,40,0.35)]"
       role="region"
       aria-label="Site index"
     >
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
         {mobileNavGroups.map((group) => (
           <div key={group.label}>
-            <p className="mb-3 font-sans text-[10px] font-bold uppercase tracking-[0.24em] text-highlight">
+            <p className="mb-3 font-sans text-[10px] font-bold uppercase tracking-[0.24em] text-primary">
               {group.label}
             </p>
             <ul className="space-y-2">
@@ -31,7 +31,7 @@ export function HeaderNavPanel({ open, onClose }: HeaderNavPanelProps) {
                     href={link.href}
                     className={`text-sm transition-colors hover:text-accent ${
                       "highlight" in link && link.highlight
-                        ? "font-semibold text-highlight"
+                        ? "font-semibold text-ink"
                         : "text-body"
                     }`}
                     onClick={onClose}

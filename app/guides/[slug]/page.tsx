@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { imageForGuide } from "@/lib/images";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { articleSchema } from "@/lib/schema/organization";
@@ -51,8 +53,9 @@ export default async function GuidePage({ params }: Props) {
  breadcrumbSchema(breadcrumbs),
  ]}
  />
- <PageHero title={guide.h1} breadcrumbs={breadcrumbs} />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <PageHero title={guide.h1} breadcrumbs={breadcrumbs} image={imageForGuide(guide.slug)} />
+ <ArticleLayout>
+ <div className="prose-content">
  {guide.sections.map((section) => (
  <div key={section.heading}>
  <h2>{section.heading}</h2>
@@ -61,7 +64,8 @@ export default async function GuidePage({ params }: Props) {
  ))}
 
  <RelatedLinks links={getGuideRelatedLinks(slug)} />
- </article>
+ </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

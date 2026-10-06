@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
 import { SITE_EMAIL } from "@/lib/site";
 
@@ -15,7 +16,8 @@ export default function PrivacyPage() {
   return (
     <PageLayout showCTA={false}>
       <PageHero title="Privacy Policy" />
-      <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+      <ArticleLayout referral={false}>
+      <div className="prose-content">
         <p>Last updated: August 2026</p>
 
         <h2>Who We Are</h2>
@@ -80,7 +82,8 @@ export default function PrivacyPage() {
           We implement appropriate technical and organisational measures to protect your data.
           Form submissions are transmitted over HTTPS.
         </p>
-      </article>
+      </div>
+      </ArticleLayout>
     </PageLayout>
   );
 }

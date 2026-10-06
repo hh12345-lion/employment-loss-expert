@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { FAQSection } from "@/components/FAQSection";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -39,8 +41,9 @@ export default function FamilyLawPage() {
  return (
  <PageLayout>
  <JsonLd data={[breadcrumbSchema(breadcrumbs), faqSchema(faqs)]} />
- <PageHero title="Family Law Employment Loss Expert Witness" breadcrumbs={breadcrumbs} />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <PageHero title="Family Law Employment Loss Expert Witness" breadcrumbs={breadcrumbs} image={siteImages.familyHorizon} />
+ <ArticleLayout>
+ <div className="prose-content">
  <h2>Employment Reports in Financial Remedy Proceedings</h2>
  <p>
  In financial remedy proceedings, employment loss experts assess the employment prospects
@@ -75,7 +78,8 @@ export default function FamilyLawPage() {
  <FAQSection faqs={faqs} />
 
  <RelatedLinks links={getPracticeAreaRelatedLinks("family-law")} />
- </article>
+ </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

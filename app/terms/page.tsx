@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
 import { SITE_EMAIL } from "@/lib/site";
 
@@ -15,7 +16,8 @@ export default function TermsPage() {
  return (
  <PageLayout showCTA={false}>
  <PageHero title="Terms of Use" />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout referral={false}>
+ <div className="prose-content">
  <p>Last updated: August 2026</p>
 
  <h2>About This Service</h2>
@@ -79,7 +81,8 @@ export default function TermsPage() {
  {SITE_EMAIL}
  </a>
  </p>
- </article>
+ </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

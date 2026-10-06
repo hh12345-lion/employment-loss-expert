@@ -1,6 +1,6 @@
 ﻿---
 title: "When Is Employment Expert Evidence Useful in an Employment Tribunal Claim?"
-description: "When solicitors may consider instructing an employment loss expert in tribunal claims — future loss, variable pay, pensions, and alternative employment."
+description: "When solicitors may consider instructing an employment loss expert in tribunal claims: future loss, variable pay, pensions, and alternative employment."
 date: "2026-09-23"
 updated: "2026-09-23"
 image: "/images/blog/when-is-employment-evidence-useful-tribunal-claim.webp"

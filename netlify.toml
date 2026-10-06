@@ -4,7 +4,7 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# AHREFS_WWW_APEX_REDIRECT — flatten https://www → apex (reduces Ahrefs redirect-chain)
+# AHREFS_WWW_APEX_REDIRECT: flatten https://www → apex (reduces Ahrefs redirect-chain)
 [[redirects]]
   from = "/*"
   to = "https://employmentlossexpert.com/:splat"

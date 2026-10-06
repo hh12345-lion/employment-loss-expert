@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { imageForCaseType } from "@/lib/images";
 import { FAQSection } from "@/components/FAQSection";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -49,8 +51,8 @@ export default async function CaseTypePage({ params }: Props) {
  return (
  <PageLayout>
  <JsonLd data={[breadcrumbSchema(breadcrumbs), faqSchema(ct.faqs)]} />
- <PageHero title={ct.h1} breadcrumbs={breadcrumbs} />
- <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <PageHero title={ct.h1} breadcrumbs={breadcrumbs} image={imageForCaseType(ct.slug)} />
+ <ArticleLayout>
  <div className="prose-content">
  {ct.paragraphs.map((p) => (
  <p key={p.slice(0, 40)}>{p}</p>
@@ -59,7 +61,7 @@ export default async function CaseTypePage({ params }: Props) {
 
  {slug === "discrimination-employment-loss" && (
  <>
- <h2 className="mt-8 text-xl font-bold text-primary">Vento bands (injury to feelings, 2025)</h2>
+ <h2 className="mt-8 text-xl font-display font-semibold text-ink">Vento bands (injury to feelings, 2025)</h2>
  <p className="text-body">
  Injury to feelings is assessed by the tribunal using Vento bands. Employment loss
  experts address financial heads of loss only.
@@ -76,7 +78,7 @@ export default async function CaseTypePage({ params }: Props) {
  </>
  )}
 
- <div className="mt-8 rounded-lg border border-border bg-section-alt p-5">
+ <div className="mt-8 border border-border bg-section-alt p-5">
  <p className="text-sm font-semibold text-primary">Related practice area</p>
  <Link href={ct.practiceArea.href} className="font-semibold text-accent">
  {ct.practiceArea.label} →
@@ -90,7 +92,7 @@ export default async function CaseTypePage({ params }: Props) {
  {relatedServiceItems.map((s) =>
  s ? (
  <li key={s.id}>
- <Link href={`/services#${s.id}`} className="text-accent hover:text-primary">
+ <Link href={`/services#${s.id}`} className="text-accent hover:text-ink">
  {s.title}
  </Link>
  </li>
@@ -103,7 +105,7 @@ export default async function CaseTypePage({ params }: Props) {
  <FAQSection faqs={ct.faqs} />
 
  <RelatedLinks links={getCaseTypeRelatedLinks(slug)} />
- </article>
+ </ArticleLayout>
  </PageLayout>
  );
 }

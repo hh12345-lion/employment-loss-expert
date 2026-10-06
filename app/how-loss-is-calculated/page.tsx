@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { LossDiagram } from "@/components/graphics/LossDiagram";
+import { siteImages } from "@/lib/images";
 import { DataTable } from "@/components/DataTable";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -43,8 +46,10 @@ export default function HowLossCalculatedPage() {
  title="How Employment Loss Is Calculated in Proceedings: The Complete Guide"
  subtitle="The definitive reference for attorneys on calculating employment loss across personal injury, employment tribunal, and family court proceedings."
  breadcrumbs={breadcrumbs}
+ image={siteImages.lossDocuments}
  />
- <article className="prose-content mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout>
+ <div className="prose-content">
  <p>
  Employment loss is calculated differently depending on the forum. Personal injury claims
  use the multiplier/multiplicand method with Ogden Tables. Employment tribunal claims
@@ -52,6 +57,8 @@ export default function HowLossCalculatedPage() {
  focus on earning capacity and loss of career. This guide explains each framework, the key
  variables, and when employment loss expert witnesses are required.
  </p>
+
+ <LossDiagram className="my-10 border border-border bg-white p-4 sm:p-8" />
 
  <h2>The Three Frameworks</h2>
  <DataTable
@@ -176,7 +183,8 @@ export default function HowLossCalculatedPage() {
  </p>
 
  <RelatedLinks links={howLossCalculatedRelatedLinks} />
- </article>
+ </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

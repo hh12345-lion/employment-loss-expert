@@ -100,6 +100,8 @@ export const mobileNavGroups = [
  label: "More",
  links: [
  { label: "What Is an Employment Expert?", href: "/what-is-an-employment-loss-expert" },
+ { label: "FAQ", href: "/faq" },
+ { label: "Contact", href: "/contact" },
  ],
  },
 ];

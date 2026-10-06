@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { FAQSection } from "@/components/FAQSection";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -43,8 +45,10 @@ export default function PersonalInjuryPage() {
  <PageHero
  title="Personal Injury Employment Loss Expert Witness"
  breadcrumbs={breadcrumbs}
+ image={siteImages.siteWorkers}
  />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout>
+ <div className="prose-content">
  <h2>What PI attorneys Need</h2>
  <p>
  Expert evidence on: pre-accident earnings baseline; residual earning capacity post-injury;
@@ -92,7 +96,8 @@ export default function PersonalInjuryPage() {
  <FAQSection faqs={faqs} />
 
  <RelatedLinks links={getPracticeAreaRelatedLinks("personal-injury")} />
- </article>
+ </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

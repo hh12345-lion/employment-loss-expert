@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { FAQSection } from "@/components/FAQSection";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -43,8 +45,10 @@ export default function EmploymentTribunalPage() {
  <PageHero
  title="Employment Tribunal Loss Expert Witness"
  breadcrumbs={breadcrumbs}
+ image={siteImages.courtColumns}
  />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout>
+ <div className="prose-content">
  <h2>The ET Schedule of Loss</h2>
  <p>
  The Schedule of Loss is the document setting out all financial heads of claim in an ET
@@ -54,7 +58,7 @@ export default function EmploymentTribunalPage() {
  </p>
 
  <h2>ERA 2025: Uncapped Awards from January 2027</h2>
- <div className="my-6 rounded-lg border border-highlight/30 bg-highlight/10 p-5">
+ <div className="my-6 border border-highlight/30 bg-highlight/10 p-5">
  <p>
  The Employment Rights Act 2025 removes the current cap on unfair dismissal
  compensation, increasing potential exposure particularly for senior employees and high
@@ -100,7 +104,8 @@ export default function EmploymentTribunalPage() {
  <FAQSection faqs={faqs} />
 
  <RelatedLinks links={getPracticeAreaRelatedLinks("employment-tribunal")} />
- </article>
+ </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

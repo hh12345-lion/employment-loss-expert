@@ -18,7 +18,7 @@ const nextSteps = [
  text: "A member of our team reads your instruction enquiry and matches the right expert discipline.",
  },
  {
- title: "Response within 1 business day",
+ title: "We reply by email",
  text: "We aim to reply by email with availability, scope, and next steps for instruction.",
  },
  {
@@ -46,20 +46,20 @@ export default function ThankYouPage() {
  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
  </svg>
  </div>
- <h1 className="text-2xl font-bold text-white sm:text-3xl md:text-4xl">Thank You</h1>
+ <h1 className="font-display text-2xl font-semibold text-white sm:text-3xl md:text-4xl">Thank You</h1>
  <p className="mt-4 text-base leading-relaxed text-white/85 sm:text-lg">
- Your instruction enquiry has been received. We will respond within 1 business day.
+ Your instruction enquiry has been received.
  </p>
  </div>
  </section>
 
  <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
- <h2 className="text-center text-lg font-semibold text-primary sm:text-xl">What happens next</h2>
+ <h2 className="text-center text-lg font-display font-semibold text-ink sm:text-xl">What happens next</h2>
  <ol className="mt-8 space-y-4">
  {nextSteps.map((step, index) => (
  <li
  key={step.title}
- className="card-shadow flex gap-4 rounded-lg border border-border bg-white p-4 sm:p-5"
+ className="flex gap-4 border border-border bg-white p-4 sm:p-5"
  >
  <span
  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-accent text-sm font-bold text-white sm:h-10 sm:w-10"
@@ -68,7 +68,7 @@ export default function ThankYouPage() {
  {index + 1}
  </span>
  <div className="min-w-0 text-left">
- <h3 className="font-semibold text-primary">{step.title}</h3>
+ <h3 className="font-display font-semibold text-ink">{step.title}</h3>
  <p className="mt-1 text-sm leading-relaxed text-body sm:text-base">{step.text}</p>
  </div>
  </li>
@@ -78,13 +78,13 @@ export default function ThankYouPage() {
  <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:justify-center sm:gap-4">
  <Link
  href="/"
- className="inline-flex min-h-11 items-center justify-center rounded bg-accent px-8 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-primary"
+ className="inline-flex min-h-11 items-center justify-center bg-highlight px-8 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-ink"
  >
  Return to Homepage
  </Link>
  <a
  href={`mailto:${SITE_EMAIL}`}
- className="inline-flex min-h-11 items-center justify-center rounded border border-border bg-white px-8 py-3 text-center text-sm font-semibold text-primary transition-colors hover:bg-section-alt"
+ className="inline-flex min-h-11 items-center justify-center border border-border bg-white px-8 py-3 text-center text-sm font-semibold text-primary transition-colors hover:bg-section-alt"
  >
  Email {SITE_EMAIL}
  </a>

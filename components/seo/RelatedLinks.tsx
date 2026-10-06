@@ -15,7 +15,7 @@ export function RelatedLinks({
 
  return (
  <nav
- className="mt-10 rounded-lg border border-border bg-section-alt p-5"
+ className="mt-10 border border-border bg-section-alt p-5"
  aria-label={title}
  >
  <h2 className="text-sm font-semibold uppercase tracking-wide text-primary">{title}</h2>
@@ -24,7 +24,7 @@ export function RelatedLinks({
  <li key={link.href}>
  <Link
  href={link.href}
- className="text-sm font-medium text-accent hover:text-primary hover:underline"
+ className="text-sm font-medium text-accent hover:text-ink hover:underline"
  >
  {link.label}
  </Link>

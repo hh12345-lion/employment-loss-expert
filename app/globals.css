@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary: #0f3d3e;
-  --color-accent: #1a6b6c;
-  --color-highlight: #c45c26;
-  --color-section-alt: #eef6f6;
-  --color-surface: #f7fafa;
-  --color-border: #c5d9d9;
-  --color-body: #3f4f4f;
-  --color-ink: #0a2425;
+  --color-primary: #1c4948;
+  --color-accent: #1c4948;
+  --color-highlight: #b25437;
+  --color-section-alt: #e7f0f0;
+  --color-surface: #f7f8f7;
+  --color-border: #c7d2d1;
+  --color-body: #3d5453;
+  --color-ink: #0d2928;
   --font-sans: var(--font-source-sans);
   --font-display: var(--font-literata);
   --radius-card: 0px;
@@ -93,6 +93,10 @@ svg {
   color: var(--color-ink);
 }
 
+[data-article] h2 {
+  scroll-margin-top: 6rem;
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -128,4 +132,58 @@ svg {
 
 .reveal-up {
   animation: revealUp 0.55s ease-out both;
+}
+
+/* Brand photography. Files are pre-toned to the palette; these rules only
+   decide how each photo meets the page. */
+
+/* Inner-page hero: photo bleeds in from the right and dissolves into white. */
+.hero-photo {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 55%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 55%);
+}
+
+.hero-photo-band {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 45%);
+}
+
+/* Closing band: photo dissolves into the dark ground on its left edge. */
+.cta-photo {
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 70%);
+  mask-image: linear-gradient(to right, transparent 0%, #000 70%);
+}
+
+@media (max-width: 767px) {
+  .cta-photo {
+    opacity: 0.22;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* Homepage hero: photo cut to the upper shape of the monogram. */
+.monogram-photo {
+  -webkit-mask: url("/brand/mask-top.svg") center / 100% 100% no-repeat;
+  mask: url("/brand/mask-top.svg") center / 100% 100% no-repeat;
+}
+
+/* Card photo: lifts slightly on hover of the parent link. */
+.card-photo img {
+  transition: transform 0.6s ease;
+}
+
+.group:hover .card-photo img {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-photo img {
+    transition: none;
+  }
+
+  .group:hover .card-photo img {
+    transform: none;
+  }
 }

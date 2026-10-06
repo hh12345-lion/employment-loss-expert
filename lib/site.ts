@@ -1,6 +1,6 @@
 const DEFAULT_SITE_URL = "https://employmentlossexpert.com";
 
-/** Canonical origin for SEO — strips www; ignores localhost/netlify preview env. */
+/** Canonical origin for SEO: strips www; ignores localhost/netlify preview env. */
 export function getPublicSiteUrl(): string {
   const fallback = DEFAULT_SITE_URL;
   const raw = process.env.NEXT_PUBLIC_SITE_URL?.trim();
@@ -24,19 +24,19 @@ export function getPublicSiteUrl(): string {
 export const SITE_URL = getPublicSiteUrl();
 export const SITE_NAME = "EmploymentLossExpert";
 export const SITE_EMAIL = "contact@employmentlossexpert.com";
-/** Soft geo — avoid repeating country names in marketing copy. */
+/** Soft geo: avoid repeating country names in marketing copy. */
 export const SITE_REGION = "worldwide";
 export const SITE_REGION_LABEL = "worldwide";
 export const LINKEDIN_URL =
   "https://www.linkedin.com/company/employment-loss-expert";
 
 export const COLORS = {
-  primary: "#0F3D3E",
-  accent: "#1A6B6C",
-  highlight: "#C45C26",
-  background: "#F7FAFA",
-  sectionAlt: "#EEF6F6",
-  border: "#C5D9D9",
-  heading: "#0A2425",
-  body: "#3F4F4F",
+  primary: "#1C4948",
+  accent: "#1C4948",
+  highlight: "#B25437",
+  background: "#F7F8F7",
+  sectionAlt: "#E7F0F0",
+  border: "#C7D2D1",
+  heading: "#0D2928",
+  body: "#3D5453",
 } as const;

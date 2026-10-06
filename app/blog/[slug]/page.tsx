@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { getBlogBySlug, getBlogSlugs } from "@/lib/blog";
@@ -97,7 +98,9 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       ) : null}
 
-      <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+      <ArticleLayout>
+
+      <div className="prose-content">
         <nav aria-label="Breadcrumb" className="mb-6 not-prose">
           <ol className="flex flex-wrap items-center gap-1 text-xs uppercase tracking-wide text-body/70">
             {breadcrumbs.map((item, i) => (
@@ -146,7 +149,9 @@ export default async function BlogPostPage({ params }: Props) {
             Request a referral
           </Link>
         </p>
-      </article>
+      </div>
+
+      </ArticleLayout>
     </PageLayout>
   );
 }

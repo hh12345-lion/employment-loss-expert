@@ -3,6 +3,8 @@ export type ServiceFaq = { question: string; answer: string };
 export type Service = {
  id: string;
  title: string;
+ /** One-line version for cards. */
+ summary: string;
  description: string;
  methodology: { step: string; detail: string }[];
  faqs: ServiceFaq[];
@@ -13,6 +15,8 @@ export const services: Service[] = [
  {
  id: "loss-of-earnings-pi",
  title: "Loss of Earnings Reports (PI)",
+ summary:
+ "Past and future loss for personal injury and clinical negligence claims, using Ogden Tables methodology.",
  description:
  "Comprehensive loss of earnings reports for personal injury and clinical negligence claims, establishing pre-accident earnings baselines and calculating past and future loss using Ogden Tables methodology.",
  methodology: [
@@ -45,6 +49,8 @@ export const services: Service[] = [
  {
  id: "residual-earning-capacity",
  title: "Residual Earning Capacity Assessment",
+ summary:
+ "What a claimant can realistically earn after injury or dismissal.",
  description:
  "Expert assessment of what a claimant can realistically earn post-injury or post-dismissal, considering medical limitations, transferable skills, and labour market conditions.",
  methodology: [
@@ -70,6 +76,8 @@ export const services: Service[] = [
  {
  id: "labour-market-analysis",
  title: "Labour Market Analysis",
+ summary:
+ "Job availability, salary levels, and career progression in the claimant's sector and alternatives.",
  description:
  "Detailed analysis of employment availability, salary levels, and career progression in the claimant's sector and alternative sectors.",
  methodology: [
@@ -94,6 +102,8 @@ export const services: Service[] = [
  {
  id: "smith-v-manchester",
  title: "Smith v Manchester Reports",
+ summary:
+ "Support for awards where a claimant faces handicap on the open labour market.",
  description:
  "Expert reports supporting Smith v Manchester awards where claimants face handicap on the open labour market following injury.",
  methodology: [
@@ -119,6 +129,8 @@ export const services: Service[] = [
  {
  id: "pension-loss",
  title: "Pension Loss Calculations",
+ summary:
+ "Pension loss in PI, ET, and matrimonial proceedings.",
  description:
  "Calculation of pension loss in PI, ET, and matrimonial proceedings using Ogden Tables H and contribution or actuarial methods.",
  methodology: [
@@ -143,6 +155,8 @@ export const services: Service[] = [
  {
  id: "et-schedule-of-loss",
  title: "ET Schedule of Loss Preparation",
+ summary:
+ "Preparation and review of Schedules of Loss for complex and high-value tribunal cases.",
  description:
  "Preparation and review of Employment Tribunal Schedules of Loss for complex and high-value cases, including ERA 2025 uncapped methodology.",
  methodology: [
@@ -174,6 +188,8 @@ export const services: Service[] = [
  {
  id: "discrimination-reports",
  title: "Discrimination Compensation Reports",
+ summary:
+ "Financial loss in discrimination, harassment, and victimisation claims.",
  description:
  "Financial loss calculations for discrimination, harassment, and victimisation claims with uncapped compensation potential.",
  methodology: [
@@ -199,6 +215,8 @@ export const services: Service[] = [
  {
  id: "loss-of-career-matrimonial",
  title: "Loss of Career (Matrimonial)",
+ summary:
+ "FPR Part 25 employment reports, career gap analysis, and earning capacity.",
  description:
  "FPR Part 25 compliant employment reports for financial remedy proceedings, including career gap analysis and earning capacity assessment.",
  methodology: [
@@ -239,5 +257,6 @@ export const allServiceFaqs = services.flatMap((s) =>
 
 export const homepageServices = services.map((s) => ({
  title: s.title,
+ summary: s.summary,
  href: `/services#${s.id}`,
 }));

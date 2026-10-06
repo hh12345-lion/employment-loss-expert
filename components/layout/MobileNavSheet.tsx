@@ -29,7 +29,7 @@ export function MobileNavSheet({ open, onClose }: MobileNavSheetProps) {
       />
       <div
         id="mobile-nav-sheet"
-        className="fixed inset-x-0 bottom-0 z-[70] max-h-[85vh] overflow-y-auto rounded-t-2xl bg-white shadow-[0_-8px_40px_rgba(10,36,37,0.18)] lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-[70] max-h-[85vh] overflow-y-auto bg-white shadow-[0_-8px_40px_rgba(13,41,40,0.18)] lg:hidden"
         role="dialog"
         aria-modal="true"
         aria-label="Navigation"
@@ -48,7 +48,7 @@ export function MobileNavSheet({ open, onClose }: MobileNavSheetProps) {
         <div className="space-y-6 px-4 py-6">
           {mobileNavGroups.map((group) => (
             <section key={group.label}>
-              <h3 className="mb-2 text-[10px] font-bold uppercase tracking-[0.22em] text-highlight">
+              <h3 className="mb-2 text-[10px] font-bold uppercase tracking-[0.22em] text-primary">
                 {group.label}
               </h3>
               <ul className="divide-y divide-border border-y border-border">
@@ -58,7 +58,7 @@ export function MobileNavSheet({ open, onClose }: MobileNavSheetProps) {
                       href={link.href}
                       className={`flex min-h-12 items-center text-base ${
                         "highlight" in link && link.highlight
-                          ? "font-semibold text-highlight"
+                          ? "font-semibold text-ink"
                           : "text-ink"
                       }`}
                       onClick={onClose}

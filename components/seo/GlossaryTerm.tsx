@@ -5,9 +5,9 @@ export function GlossaryTerm({ term }: { term: GlossaryTermType }) {
  return (
  <article
  id={term.fragmentId}
- className="scroll-mt-24 rounded-lg border border-border bg-white p-5 card-shadow"
+ className="scroll-mt-24 border border-border bg-white p-5"
  >
- <h2 className="text-lg font-bold text-primary">{term.term}</h2>
+ <h2 className="text-lg font-display font-semibold text-ink">{term.term}</h2>
  <p className="mt-2 font-medium text-body">{term.summary}</p>
  <p className="mt-2 text-body">{term.definition}</p>
  {term.link && (

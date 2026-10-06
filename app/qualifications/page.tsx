@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { articleSchema } from "@/lib/schema/organization";
@@ -37,8 +39,10 @@ export default function QualificationsPage() {
  <PageHero
  title="Employment Loss Expert Witness Qualifications & Credentials"
  breadcrumbs={breadcrumbs}
+ image={siteImages.expertWitness}
  />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout>
+ <div className="prose-content">
  <h2>Two Expert Profiles</h2>
  <h3>Employment Consultant / Vocational Expert</h3>
  <ul>
@@ -81,10 +85,11 @@ export default function QualificationsPage() {
  <li>No prior court acceptance</li>
  <li>Full-time expert with no active practice</li>
  </ul>
- </article>
- <div className="mx-auto max-w-3xl px-4 pb-12 sm:px-6 lg:px-8">
+ </div>
+ <div className="mt-10">
  <RelatedLinks title="Related pages" links={qualificationsHubLinks} />
  </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

@@ -14,7 +14,7 @@ export function CookieBanner() {
  aria-modal="false"
  className="fixed inset-x-0 bottom-0 z-[100] animate-[slideUp_0.35s_ease-out] px-4 pb-4 sm:px-6"
  >
- <div className="mx-auto max-w-4xl rounded-lg border border-border bg-white p-5 shadow-[0_-4px_24px_rgba(10,46,74,0.12)] sm:p-6">
+ <div className="mx-auto max-w-4xl border border-border bg-white p-5 shadow-[0_-4px_24px_rgba(10,46,74,0.12)] sm:p-6">
  <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
  <div className="flex-1">
  <h2 id="cookie-banner-title" className="text-lg font-bold text-primary">
@@ -38,21 +38,21 @@ export function CookieBanner() {
  <button
  type="button"
  onClick={rejectNonEssential}
- className="min-h-11 rounded border border-border px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-section-alt focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+ className="min-h-11 border border-border px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-section-alt focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
  >
  Reject Non-Essential
  </button>
  <button
  type="button"
  onClick={openPreferences}
- className="min-h-11 rounded border border-accent px-4 py-2.5 text-sm font-semibold text-accent transition-colors hover:bg-section-alt focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+ className="min-h-11 border border-accent px-4 py-2.5 text-sm font-semibold text-accent transition-colors hover:bg-section-alt focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
  >
  Customize Preferences
  </button>
  <button
  type="button"
  onClick={acceptAll}
- className="min-h-11 rounded bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
+ className="min-h-11 bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-ink focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2"
  >
  Accept All
  </button>

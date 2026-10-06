@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { DataTable } from "@/components/DataTable";
 import { FAQSection } from "@/components/FAQSection";
 import { JsonLd } from "@/components/JsonLd";
@@ -46,11 +47,12 @@ export default function ServicesPage() {
  title="Employment Loss Expert Witness Services"
  subtitle="Comprehensive employment loss expert witness services for personal injury, employment tribunal, and family law attorneys."
  breadcrumbs={breadcrumbs}
+ image={siteImages.earningsChart}
  />
  <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
  {services.map((service) => (
  <section key={service.id} id={service.id} className="mb-16 scroll-mt-24 border-b border-border pb-12 last:border-0">
- <h2 className="mb-3 text-2xl font-bold text-primary">{service.title}</h2>
+ <h2 className="mb-3 text-2xl font-display font-semibold text-ink">{service.title}</h2>
  <p className="mb-4 text-body">{service.description}</p>
  <DataTable
  caption={`${service.title} methodology`}
@@ -78,14 +80,14 @@ export default function ServicesPage() {
  <FAQSection faqs={siteFaqs} title="General Employment Loss Expert Witness FAQs" />
  </section>
 
- <div className="mt-12 rounded-lg border border-border bg-section-alt p-6 text-center">
+ <div className="mt-12 border border-border bg-section-alt p-6 text-center">
  <p className="text-body">
  Questions about instructing an expert? Email us at{" "}
- <a href={`mailto:${SITE_EMAIL}`} className="font-semibold text-accent hover:text-primary">
+ <a href={`mailto:${SITE_EMAIL}`} className="font-semibold text-accent hover:text-ink">
  {SITE_EMAIL}
  </a>{" "}
  or{" "}
- <Link href="/contact" className="font-semibold text-accent hover:text-primary">
+ <Link href="/contact" className="font-semibold text-accent hover:text-ink">
  submit an enquiry
  </Link>
  .

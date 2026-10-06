@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { EraTimeline } from "@/components/graphics/EraTimeline";
+import { siteImages } from "@/lib/images";
 import { DataTable } from "@/components/DataTable";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -43,8 +46,10 @@ export default function Era2025Page() {
  <PageHero
  title="Employment Rights Act 2025: What It Means for Employment Loss Expert Evidence"
  breadcrumbs={breadcrumbs}
+ image={siteImages.courtColumns}
  />
- <article className="prose-content mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout>
+ <div className="prose-content">
  <h2>The Most Significant Change to ET Compensation in a Decade</h2>
  <p>
  The Employment Rights Act 2025 removes both statutory caps on unfair dismissal
@@ -52,6 +57,8 @@ export default function Era2025Page() {
  Tribunals will assess compensation based solely on the employee&apos;s actual financial
  loss.
  </p>
+
+ <EraTimeline />
 
  <h2>Key Changes at a Glance</h2>
  <DataTable
@@ -129,7 +136,8 @@ export default function Era2025Page() {
  </p>
 
  <RelatedLinks links={era2025RelatedLinks} />
- </article>
+ </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

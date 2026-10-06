@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { articleSchema } from "@/lib/schema/organization";
@@ -38,8 +40,10 @@ export default function HowToInstructPage() {
  <PageHero
  title="How to Instruct an Employment Loss Expert Witness"
  breadcrumbs={breadcrumbs}
+ image={siteImages.signingInstruction}
  />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout>
+ <div className="prose-content">
  <h2>For PI attorneys</h2>
  <ol>
  <li>Identify loss type (future loss vs Smith v Manchester)</li>
@@ -81,7 +85,7 @@ export default function HowToInstructPage() {
  <h2>Matching Timeline</h2>
  <ol>
  <li>Submit case details via our contact form</li>
- <li>Initial review within 1 business day</li>
+ <li>Initial review of the case details</li>
  <li>Expert profile and availability provided</li>
  <li>Conflict check completed</li>
  <li>Letter of instruction agreed</li>
@@ -96,10 +100,11 @@ export default function HowToInstructPage() {
  <li>Unwilling to comply with CPR Part 35 or FPR Part 25 requirements</li>
  <li>No professional indemnity insurance</li>
  </ul>
- </article>
- <div className="mx-auto max-w-3xl px-4 pb-12 sm:px-6 lg:px-8">
+ </div>
+ <div className="mt-10">
  <RelatedLinks title="Related pages" links={howToInstructHubLinks} />
  </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }

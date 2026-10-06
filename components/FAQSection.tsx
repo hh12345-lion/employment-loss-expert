@@ -9,10 +9,10 @@ export function FAQSection({ faqs, title = "Frequently Asked Questions" }: { faq
 
  return (
  <section className="py-8">
- <h2 className="mb-6 text-2xl font-bold text-primary">{title}</h2>
+ <h2 className="mb-6 text-2xl font-display font-semibold text-ink">{title}</h2>
  <div className="space-y-3">
  {faqs.map((faq, index) => (
- <div key={faq.question} className="rounded-lg border border-border bg-white card-shadow">
+ <div key={faq.question} className="border border-border bg-white">
  <button
  type="button"
  className="flex min-h-11 w-full items-center justify-between gap-4 px-4 py-4 text-left font-semibold text-primary"

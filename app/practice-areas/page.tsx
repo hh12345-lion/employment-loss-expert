@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
+import { PhotoCard } from "@/components/PhotoCard";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { practiceAreasHubLinks } from "@/lib/data/seo-related-links";
@@ -26,18 +27,21 @@ const areas = [
  description:
  "Loss of earnings past and future, Ogden Tables, Smith v Manchester, pension loss, residual earning capacity, and Fatal Accidents Act dependency claims.",
  href: "/practice-areas/personal-injury",
+ image: siteImages.siteWorkers,
  },
  {
  title: "Employment Tribunal",
  description:
  "ET Schedule of Loss, Polkey reductions, discrimination compensation, whistleblowing, wrongful dismissal, and uncapped ERA 2025 awards.",
  href: "/practice-areas/employment-tribunal",
+ image: siteImages.courtColumns,
  },
  {
  title: "Family Law",
  description:
  "Loss of career in divorce, financial remedy proceedings, FPR Part 25 employment reports, career gap analysis, and SJE appointments.",
  href: "/practice-areas/family-law",
+ image: siteImages.familyHorizon,
  },
 ];
 
@@ -49,19 +53,19 @@ export default function PracticeAreasHubPage() {
  title="Employment Loss Expert Witnesses by Practice Area"
  subtitle="Three distinct audiences, one specialist service. Find employment loss expert witnesses tailored to your practice area."
  breadcrumbs={breadcrumbs}
+ image={siteImages.scalesOfJustice}
  />
- <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+ <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
  <div className="grid gap-6 md:grid-cols-3">
  {areas.map((area) => (
- <Link
+ <PhotoCard
  key={area.href}
  href={area.href}
- className="rounded-lg border border-border bg-white p-6 card-shadow transition-shadow hover:shadow-md"
- >
- <h2 className="mb-3 text-xl font-bold text-primary">{area.title}</h2>
- <p className="text-body">{area.description}</p>
- <span className="mt-4 inline-block font-semibold text-accent">Learn more →</span>
- </Link>
+ title={area.title}
+ description={area.description}
+ image={area.image}
+ cta="Learn more"
+ />
  ))}
  </div>
  <RelatedLinks title="Explore employment loss expert evidence" links={practiceAreasHubLinks} />

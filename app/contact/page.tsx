@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { ContactForm } from "@/components/ContactForm";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
@@ -11,7 +12,7 @@ import { SITE_EMAIL } from "@/lib/site";
 export const metadata: Metadata = createMetadata({
  title: "Request an Employment Loss Expert Witness | Contact",
  description:
- "Share a few case details to be matched with a qualified employment loss expert witness. Typical response within one business day.",
+ "Share a few case details to be matched with a qualified employment loss expert witness.",
  path: "/contact",
 });
 
@@ -42,7 +43,6 @@ const trustPoints = [
  "Personal injury, employment, and family-law matters",
  "Matched to case type and timeline",
  "Independent expert witnesses",
- "Response within one business day",
 ];
 
 export default function ContactPage() {
@@ -53,6 +53,7 @@ export default function ContactPage() {
  title="Request an employment loss expert"
  subtitle="Tell us who you are and a little about the matter. We will follow up with a referral match."
  breadcrumbs={breadcrumbs}
+ image={siteImages.caseConference}
  />
  <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
  <div className="mb-12 grid gap-6 border-b border-border pb-10 md:grid-cols-3">

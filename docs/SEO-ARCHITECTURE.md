@@ -40,7 +40,7 @@ Do not publish duplicate content at alias paths. If aliases are ever needed, use
 
 ## 1. Keyword strategy
 
-### Tier 1 — Transactional
+### Tier 1: Transactional
 
 - employment loss expert witness UK
 - employment loss expert witness
@@ -55,7 +55,7 @@ Do not publish duplicate content at alias paths. If aliases are ever needed, use
 
 **Primary landing pattern:** homepage, `/services`, `/contact`, relevant `/practice-areas/*` and `/case-types/*`.
 
-### Tier 2 — Informational
+### Tier 2: Informational
 
 - how is employment loss calculated UK
 - what is a Smith v Manchester award
@@ -70,7 +70,7 @@ Do not publish duplicate content at alias paths. If aliases are ever needed, use
 
 **Primary landing pattern:** `/how-loss-is-calculated`, `/era-2025`, `/guides/*`, `/glossary`, `/faq`.
 
-### Tier 3 — Long-tail / case type
+### Tier 3: Long-tail / case type
 
 - personal injury loss of earnings expert UK
 - clinical negligence career loss expert witness
@@ -123,14 +123,14 @@ Do not publish duplicate content at alias paths. If aliases are ever needed, use
 
 Eight topical hubs. **Build and refresh priority** (highest first):
 
-1. Hub 2 — ERA 2025 / ET uncapped awards  
-2. Hub 7 — How loss is calculated (GEO pillar)  
-3. Hub 1 — Personal injury loss of earnings  
-4. Hub 3 — ET Schedule of Loss  
-5. Hub 5 — Smith v Manchester  
-6. Hub 4 — Discrimination and whistleblowing  
-7. Hub 6 — Family law / loss of career  
-8. Hub 8 — Instruction process  
+1. Hub 2: ERA 2025 / ET uncapped awards  
+2. Hub 7: How loss is calculated (GEO pillar)  
+3. Hub 1: Personal injury loss of earnings  
+4. Hub 3: ET Schedule of Loss  
+5. Hub 5: Smith v Manchester  
+6. Hub 4: Discrimination and whistleblowing  
+7. Hub 6: Family law / loss of career  
+8. Hub 8: Instruction process  
 
 ### Cluster overview (mermaid)
 
@@ -190,7 +190,7 @@ flowchart TB
 | | |
 |--|--|
 | **Pillar** | `/era-2025` |
-| **Priority** | **Highest** — breaking law, first-mover content |
+| **Priority** | **Highest**: breaking law, first-mover content |
 | **Target keywords** | ERA 2025, unfair dismissal cap removed, ET loss expert, employment rights act 2025 |
 
 **Supporting pages:**
@@ -543,7 +543,7 @@ Example: `https://www.employmentlossexpert.com/era-2025?utm_source=jspubs&utm_me
 4. **Ogden Tables 8th Edition:** What Changed and What Solicitors Need to Know  
 5. **Vento Bands 2025 Update:** Current Injury to Feelings Award Ranges  
 
-**LinkedIn:** Company page **EmploymentLossExpert** — link from Organization `sameAs` and footer.
+**LinkedIn:** Company page **EmploymentLossExpert**: link from Organization `sameAs` and footer.
 
 **Outreach owner:** Assign named owner per quarter; track placements in a simple spreadsheet (title, URL, date, follow-up links built).
 
@@ -609,7 +609,7 @@ Still actively searched by PI solicitors (disability definition, reduction facto
 | `html lang="en-GB"` | `app/layout.tsx` |
 | hreflang `en-GB`, `en-US`, `x-default` | Add to `createMetadata()` `alternates.languages` when US landing variant exists |
 | `Lead_notification_url` | Netlify env + `.env.example` (contact form webhook) |
-| `NEXT_PUBLIC_SITE_URL` | `https://www.employmentlossexpert.com` — `lib/site.ts` |
+| `NEXT_PUBLIC_SITE_URL` | `https://www.employmentlossexpert.com`: `lib/site.ts` |
 | `GOOGLE_SITE_VERIFICATION` | `app/layout.tsx` `metadata.verification.google` |
 | `BING_SITE_VERIFICATION` | `app/layout.tsx` `metadata.verification.other` |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Analytics via cookie consent |
@@ -656,10 +656,10 @@ Still actively searched by PI solicitors (disability definition, reduction facto
 | `/guides/family-law-employment-reports` | Yes | 0.80 | Yes |
 | `/glossary` | Yes | 0.75 | Yes |
 | `/cookies` | Yes | 0.50 | Yes |
-| `/contact` | No | — | Yes |
-| `/thank-you` | No | — | noindex |
-| `/privacy` | No | — | noindex |
-| `/terms` | No | — | noindex |
+| `/contact` | No |: | Yes |
+| `/thank-you` | No |: | noindex |
+| `/privacy` | No |: | noindex |
+| `/terms` | No |: | noindex |
 
 Source of truth for generation: `lib/seo/publicUrlInventory.ts`.
 

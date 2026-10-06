@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { createMetadata } from "@/lib/metadata";
 import { PageLayout } from "@/components/PageLayout";
+import { ArticleLayout } from "@/components/ArticleLayout";
 import { PageHero } from "@/components/PageHero";
+import { siteImages } from "@/lib/images";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema } from "@/lib/schema/breadcrumb";
 import { articleSchema } from "@/lib/schema/organization";
@@ -38,8 +40,10 @@ export default function WhatIsPage() {
  <PageHero
  title="What Is an Employment Loss Expert Witness?"
  breadcrumbs={breadcrumbs}
+ image={siteImages.expertWitness}
  />
- <article className="prose-content mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
+ <ArticleLayout>
+ <div className="prose-content">
  <h2>Definition</h2>
  <p>
  An employment loss expert witness is a specialist, typically an employment consultant,
@@ -124,10 +128,11 @@ export default function WhatIsPage() {
  a way they have never been before.{" "}
  <Link href="/era-2025">Read our ERA 2025 guide</Link>.
  </p>
- </article>
- <div className="mx-auto max-w-3xl px-4 pb-12 sm:px-6 lg:px-8">
+ </div>
+ <div className="mt-10">
  <RelatedLinks title="Related pages" links={whatIsExpertLinks} />
  </div>
+ </ArticleLayout>
  </PageLayout>
  );
 }
